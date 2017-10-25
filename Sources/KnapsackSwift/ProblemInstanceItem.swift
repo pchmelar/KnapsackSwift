@@ -7,12 +7,14 @@
 //
 
 final class ProblemInstanceItem {
-	
+
     var weight: Int = 0
     var value: Int = 0
+    var ratio: Int = 0
 
     init(weight: Int, value: Int) {
     		self.weight = weight
     		self.value = value
+    		ratio = value / weight
     }
 }

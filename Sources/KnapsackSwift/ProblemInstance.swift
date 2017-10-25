@@ -24,7 +24,7 @@ final class ProblemInstance {
 				}
     }
 
-    func solve(n: Int, currentWeight: Int, currentValue: Int) -> Int {
+    func solveBruteForce(n: Int, currentWeight: Int, currentValue: Int) -> Int {
     
 		    if n == -1 {
 		        if currentWeight <= maxWeight {
@@ -34,10 +34,26 @@ final class ProblemInstance {
 		    }
 		    
 		    // next step of recursion where we don't take in current item
-		    let rec1 = solve(n: n-1, currentWeight: currentWeight, currentValue: currentValue)
+		    let rec1 = solveBruteForce(n: n-1, currentWeight: currentWeight, currentValue: currentValue)
 		    // next step of recursion where we take in current item
-		    let rec2 = solve(n: n-1, currentWeight: currentWeight + items[n].weight, currentValue: currentValue + items[n].value)
+		    let rec2 = solveBruteForce(n: n-1, currentWeight: currentWeight + items[n].weight, currentValue: currentValue + items[n].value)
 		
 		    return max(rec1, rec2)
 		}
+
+		func solveHeuristic() -> Int {
+
+				var currentWeight: Int = 0 
+				var currentValue: Int = 0
+
+				for item in items.sorted(by: {$0.ratio > $1.ratio}) {
+						if currentWeight + item.weight <= maxWeight {
+								currentWeight += item.weight
+								currentValue += item.value
+						}
+				}
+
+				return currentValue
+		}
+
 }

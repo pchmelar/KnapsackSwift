@@ -32,7 +32,8 @@ if CommandLine.arguments.count != 2 {
         let lines = inputFile.components(separatedBy: .newlines)
         for line in lines {
         		let problem = ProblemInstance(input: line)
-        		let bestValue = problem.solve(n: problem.size-1, currentWeight: 0, currentValue: 0)
+        		//let bestValue = problem.solveBruteForce(n: problem.size-1, currentWeight: 0, currentValue: 0)
+        		let bestValue = problem.solveHeuristic()
         		print("Best value of problem instance #\(problem.id) is \(bestValue)")
         }
     }
