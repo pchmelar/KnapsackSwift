@@ -6,31 +6,38 @@
 //  Copyright © 2017 Petr Chmelar All rights reserved.
 //
 
-let weight: [Int] = [10, 7, 19, 9, 1, 20, 2, 8].reversed()
-let value: [Int] = [15, 11, 2, 3, 20, 1, 4, 8].reversed()
-let maxWeight: Int = 50
+import Foundation
 
-var bestValue: Int = 0
-var totalWeight: Int = 0
+// parse arguments
+if CommandLine.arguments.count != 2 {
+    print("Usage: KnapsackSwift inputFile")
+} else {
 
-func solve(n: Int, currentWeight: Int, currentValue: Int) {
-    
-    if n == -1 {
-        // update bestValue
-        if currentWeight <= maxWeight, currentValue > bestValue {
-            bestValue = currentValue
-            totalWeight = currentWeight
+		// determine full path of inputFile
+		var fullPath = ""
+		let inputPath = CommandLine.arguments[1]
+		if inputPath.hasPrefix("/") {
+				fullPath = inputPath
+		} else {
+				let cwd = FileManager.default.currentDirectoryPath
+				let urlCwd = URL(fileURLWithPath: cwd)
+    		if let path = URL(string: inputPath, relativeTo: urlCwd)?.path {
+    				fullPath = path
+    		}
+		}
+
+		// read input file
+    do {
+        let inputFile = try String(contentsOf: URL(fileURLWithPath: fullPath), encoding: .utf8)
+        let lines = inputFile.components(separatedBy: .newlines)
+        for line in lines {
+        		let problem = ProblemInstance(input: line)
+        		let bestValue = problem.solve(n: problem.size-1, currentWeight: 0, currentValue: 0)
+        		print("Best value of problem instance #\(problem.id) is \(bestValue)")
         }
-        // end of recursion
-        return
     }
-    
-    // next step of recursion where we don't take in current item
-    solve(n: n-1, currentWeight: currentWeight, currentValue: currentValue)
-    // next step of recursion where we take in current item
-    solve(n: n-1, currentWeight: currentWeight + weight[n], currentValue: currentValue + value[n])
-}
+    catch {
+    		print("Input file corrupted")
+    }
 
-solve(n: weight.count-1, currentWeight: 0, currentValue: 0)
-print("Best value: \(bestValue)")
-print("Total weight: \(totalWeight)")
+}
