@@ -1,6 +1,6 @@
 # KnapsackSwift
 
-- Knapsack problem solver written in Swift
+- Knapsack problem solver written in Swift 4.0
 - MI-PAA semestral project @ CTU FIT university
 
 ## How to build and run the solver
