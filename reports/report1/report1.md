@@ -36,4 +36,9 @@
 | 40             | NaN                         | 2.78E-05                   | NaN                            | NaN                             |
 
 ## Grafy
+![graph1](src/graph1.png "graph1")
+![graph2](src/graph2.png "graph2")
 
+## Závěr
+- Výpočetní čas hrubou silou roste exponenciálně, protože je nutné projít 2^n kombinací, kde n je počet předmětů.
+- Použitím heuristiky je výpočetní čas výrazně nižší a roste zdánlivě lineárně. Ve skutečnosti je ale složitost n\*log(n), protože pole předmětů je potřeba seřadit dle poměru ceny a váhy.
