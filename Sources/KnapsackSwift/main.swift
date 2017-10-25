@@ -30,12 +30,28 @@ if CommandLine.arguments.count != 2 {
     do {
         let inputFile = try String(contentsOf: URL(fileURLWithPath: fullPath), encoding: .utf8)
         let lines = inputFile.components(separatedBy: .newlines)
+
+        // solve with brute force
+        var start = NSDate()
         for line in lines {
-        		let problem = ProblemInstance(input: line)
-        		//let bestValue = problem.solveBruteForce(n: problem.size-1, currentWeight: 0, currentValue: 0)
-        		let bestValue = problem.solveHeuristic()
-        		print("Best value of problem instance #\(problem.id) is \(bestValue)")
+        		if line != "" {
+        				let problem = ProblemInstance(input: line)
+        				let bestValue = problem.solveBruteForce(n: problem.size-1, currentWeight: 0, currentValue: 0)
+        				//print("Best value of problem instance #\(problem.id) is \(bestValue)")
+        		}
         }
+        print("Brute force method evaluation time: \(abs(start.timeIntervalSinceNow))")
+
+        // solve with heuristic
+        start = NSDate()
+        for line in lines {
+        		if line != "" {
+        				let problem = ProblemInstance(input: line)
+        				let bestValue = problem.solveHeuristic()
+        				//print("Best value of problem instance #\(problem.id) is \(bestValue)")
+        		}
+        }
+        print("Heuristic method evaluation time: \(abs(start.timeIntervalSinceNow))")
     }
     catch {
     		print("Input file corrupted")
