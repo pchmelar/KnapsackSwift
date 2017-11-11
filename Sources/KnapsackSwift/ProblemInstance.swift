@@ -56,4 +56,33 @@ final class ProblemInstance {
 				return currentValue
 		}
 
+		func solveBranchAndBound(n: Int, currentWeight: Int, currentValue: Int, bestValue: Int) -> Int {
+
+				if n == -1 {
+		        if currentWeight <= maxWeight {
+		            return currentValue
+		        }
+		        return 0
+		    }
+
+		    // determine if we can update the bestValue
+		    var newBestValue = bestValue
+		    if currentWeight + items[n].weight <= maxWeight {
+		    		newBestValue = bestValue + items[n].value
+		    }
+		    
+		    // get sum value of remaining items
+		    let potentialValue = Array(items[..<n]).reduce(currentValue) { $0 + $1.value }
+
+		    // next step of recursion where we don't take in current item (only if there is a potential to find better value)
+		    var rec1 = 0
+		   	if potentialValue >= newBestValue {
+		    		rec1 = solveBranchAndBound(n: n-1, currentWeight: currentWeight, currentValue: currentValue, bestValue: newBestValue)
+		    }
+		    // next step of recursion where we take in current item
+		    let rec2 = solveBranchAndBound(n: n-1, currentWeight: currentWeight + items[n].weight, currentValue: currentValue + items[n].value, bestValue: newBestValue)
+		
+		    return max(rec1, rec2)
+		}
+
 }

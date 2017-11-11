@@ -9,7 +9,7 @@
 import Foundation
 
 // parse arguments
-if CommandLine.arguments.count == 3, let met = Int(CommandLine.arguments[2]), met > 0, met < 3 {
+if CommandLine.arguments.count == 3, let met = Int(CommandLine.arguments[2]), met > 0, met < 4 {
 
 		// determine full path of inputFile
 		var fullPath = ""
@@ -41,9 +41,11 @@ if CommandLine.arguments.count == 3, let met = Int(CommandLine.arguments[2]), me
         						bestValue = problem.solveBruteForce(n: problem.size-1, currentWeight: 0, currentValue: 0)
         				case 2:
         						bestValue = problem.solveHeuristic()
+        				case 3:
+        						bestValue = problem.solveBranchAndBound(n: problem.size-1, currentWeight: 0, currentValue: 0, bestValue: 0)
         				default:()
         				}
-        				//print("Best value of problem instance #\(problem.id) is \(bestValue)")
+        				print("Best value of problem instance #\(problem.id) is \(bestValue)")
         		}
         }
         print("Evaluation time: \(abs(start.timeIntervalSinceNow))")
@@ -54,5 +56,5 @@ if CommandLine.arguments.count == 3, let met = Int(CommandLine.arguments[2]), me
 
 } else {
 	  print("Usage: KnapsackSwift inputFile method")
-    print("Methods: 1 for brute force, 2 for heuristic")
+    print("Methods: 1 for bruteForce, 2 for heuristic, 3 for branchAndBound")
 }
