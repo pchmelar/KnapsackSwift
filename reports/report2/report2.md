@@ -26,6 +26,18 @@ table[i][j] = min(table[i-1][j], table[i-1][j-items[i-1].value] + items[i-1].wei
 ```
 - Výsledné řešení poté nalezneme v posledním sloupci, jeho hodnota je menší než maxWeight a má maximální index v rámci sloupce.
 
+### Aproximativní algoritmus FPTAS
+- Zde využijeme metody dynamického programování nad zjednodušeným modelem. Zjednodušení dosáhneme vydělením cen konstantou, čímž se sníží hodnota maxValue (suma cen všech věcí) a tedy i složitost metody dynamického programování.
+- Pro zvolenou maximální relativní chybu epsilon má konstanta hodnotu:
+```swift
+coeff = (eps * maxValue) / n
+```
+- Ceny modifikujeme vydělením získanou konstantou:
+```swift
+item.value = floor(item.value / coeff)
+```
+- Pro spočítání relativní chyby algoritmu jsou potom použité původní ceny řešení, které vzniklo z upravených cen.
+
 ## Naměřené výsledky
 
 ## Grafy

@@ -6,6 +6,8 @@
 //  Copyright © 2017 Petr Chmelar All rights reserved.
 //
 
+import Foundation
+
 final class ProblemInstance {
 
     var id: Int = 0
@@ -118,6 +120,21 @@ final class ProblemInstance {
 						}
 				}
 				return bestValue
+		}
+
+		func solveFPTAS() -> Int {
+
+				// compute coefficient
+				let eps: Double = 0.1
+				let maxValue: Double = Double(items.reduce(0){ $0 + $1.value })
+				let coeff: Double = (eps * maxValue) / Double(size)
+
+				// modify values
+				for item in items {
+						item.value = Int(floor(Double(item.value) / coeff))
+				}
+
+    		return solveDecomposition()
 		}
 
 }
