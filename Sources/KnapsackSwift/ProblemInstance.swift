@@ -85,4 +85,39 @@ final class ProblemInstance {
 		    return max(rec1, rec2)
 		}
 
+		func solveDecomposition() -> Int {
+
+				let maxValue: Int = items.reduce(0){ $0 + $1.value }
+				var table: [[Int]] = Array(repeating: Array(repeating: 0, count: maxValue+1), count: size+1)
+
+				// build table in bottom up manner
+				for i in 0...size {
+						for j in 0...maxValue {
+								if i == 0 {
+										if j == 0 {
+												table[i][j] = 0
+										} else {
+												table[i][j] = Int.max
+										}
+								} else {
+										// check to prevent out of bounds and int overflow errors
+										if items[i-1].value <= j, table[i-1][j-items[i-1].value] != Int.max {
+												table[i][j] = min(table[i-1][j], table[i-1][j-items[i-1].value] + items[i-1].weight)
+										} else {
+												table[i][j] = table[i-1][j]
+										}
+								}
+						}
+				}
+
+				// find result
+				var bestValue: Int = 0
+				for j in 0...maxValue {
+						if table[size][j] < maxWeight {
+								bestValue = j
+						}
+				}
+				return bestValue
+		}
+
 }
