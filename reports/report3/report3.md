@@ -6,7 +6,7 @@
 - All measurements was made on MacBook Pro (13-inch Mid 2017)   
 (CPU: Intel Core i5-7360U, RAM: 16 GB, OS: macOS High Sierra)
 - Author: Petr Chmelar
-- Date: 30/10/2017
+- Date: 30/11/2017
 
 ## Úloha
 - Využijte generátor náhodných instancí a experimentálně ohodnoťte algoritmy z hlediska kvality řešení a výpočetní náročnosti.
