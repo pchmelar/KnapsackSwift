@@ -73,11 +73,14 @@ extension ProblemInstance {
     		let alpha = (startTemp - endTemp) / Double(steps)
     		var currentTemp = startTemp
 
-    		var bestSolution: [Int] = []
+    		var bestSolution: [Int] = [] 
+    		// bestSolution = generateRandomInitialSolution()
     		var bestValue = getValueOfSolution(solution: bestSolution)
     		var currentSolution = bestSolution
 
     		while currentTemp > endTemp {
+
+    				print(currentTemp)
 
     				for _ in 0..<eqSteps {
     						let moves = generateAllMovesForSolution(solution: currentSolution)
