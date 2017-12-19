@@ -80,7 +80,7 @@ extension ProblemInstance {
 
     		while currentTemp > endTemp {
 
-    				print(currentTemp)
+    				// print(currentTemp)
 
     				for _ in 0..<eqSteps {
     						let moves = generateAllMovesForSolution(solution: currentSolution)
